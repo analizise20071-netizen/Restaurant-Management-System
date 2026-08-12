@@ -1,0 +1,81 @@
+package com.restaurant.billing;
+
+import com.restaurant.enums.PaymentMethod;
+import com.restaurant.interfaces.Payable;
+
+public class Invoice implements Payable {
+
+    private String invoiceId;
+    private String orderId;
+
+    private double subtotal;
+    private double tax;
+    private double serviceCharge;
+    private double total;
+
+    private boolean paid;
+    private PaymentMethod paymentMethod;
+
+    private static final double TAX_RATE = 0.14;
+    private static final double SERVICE_CHARGE_RATE = 0.12;
+
+    public Invoice(String invoiceId, String orderId, double subtotal) {
+
+        this.invoiceId = invoiceId;
+        this.orderId = orderId;
+        this.subtotal = subtotal;
+
+        this.paid = false;
+
+        calculateCharges();
+    }
+
+    private void calculateCharges() {
+
+        tax = subtotal * TAX_RATE;
+        serviceCharge = subtotal * SERVICE_CHARGE_RATE;
+        total = subtotal + tax + serviceCharge;
+    }
+
+    @Override
+    public double calculateTotal() {
+        return total;
+    }
+
+    public String getInvoiceId() {
+        return invoiceId;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public double getTax() {
+        return tax;
+    }
+
+    public double getServiceCharge() {
+        return serviceCharge;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void markAsPaid(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+        this.paid = true;
+    }
+}
