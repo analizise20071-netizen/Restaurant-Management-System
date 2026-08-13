@@ -21,6 +21,19 @@ public class Invoice implements Payable {
 
     public Invoice(String invoiceId, String orderId, double subtotal) {
 
+
+        if (invoiceId == null || invoiceId.trim().isEmpty()) {
+            throw new IllegalArgumentException("Invoice ID cannot be empty");
+        }
+
+        if (orderId == null || orderId.trim().isEmpty()) {
+            throw new IllegalArgumentException("Order ID cannot be empty");
+        }
+
+        if (subtotal < 0) {
+            throw new IllegalArgumentException("Subtotal cannot be negative");
+        }
+
         this.invoiceId = invoiceId;
         this.orderId = orderId;
         this.subtotal = subtotal;
