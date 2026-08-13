@@ -11,7 +11,29 @@ public class PaymentProcessor {
             CustomerAccount account,
             PaymentMethod method) {
 
+        if (invoice == null) {
+            throw new IllegalArgumentException(
+                    "Invoice cannot be null"
+            );
+        }
+
+        if (account == null) {
+            throw new IllegalArgumentException(
+                    "Customer account cannot be null"
+            );
+        }
+
+        if (invoice.isPaid()) {
+            return false;
+        }
+
         boolean successful = false;
+
+        if (method == null) {
+            throw new IllegalArgumentException(
+                    "Payment method cannot be null"
+            );
+        }
 
         if (method == PaymentMethod.CASH) {
             successful = true;

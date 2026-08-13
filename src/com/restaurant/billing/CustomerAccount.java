@@ -6,6 +6,19 @@ public class CustomerAccount {
     private int loyaltyPoints;
 
     public CustomerAccount(double balance, int loyaltyPoints) {
+
+        if (balance < 0) {
+            throw new IllegalArgumentException(
+                    "Balance cannot be negative"
+            );
+        }
+
+        if (loyaltyPoints < 0) {
+            throw new IllegalArgumentException(
+                    "Loyalty points cannot be negative"
+            );
+        }
+
         this.balance = balance;
         this.loyaltyPoints = loyaltyPoints;
     }
@@ -45,4 +58,5 @@ public class CustomerAccount {
         loyaltyPoints -= points;
         return true;
     }
+
 }
