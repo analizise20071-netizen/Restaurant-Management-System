@@ -21,23 +21,27 @@ public class Invoice implements Payable {
 
     public Invoice(String invoiceId, String orderId, double subtotal) {
 
-
         if (invoiceId == null || invoiceId.trim().isEmpty()) {
-            throw new IllegalArgumentException("Invoice ID cannot be empty");
+            throw new IllegalArgumentException(
+                    "Invoice ID cannot be empty"
+            );
         }
 
         if (orderId == null || orderId.trim().isEmpty()) {
-            throw new IllegalArgumentException("Order ID cannot be empty");
+            throw new IllegalArgumentException(
+                    "Order ID cannot be empty"
+            );
         }
 
         if (subtotal < 0) {
-            throw new IllegalArgumentException("Subtotal cannot be negative");
+            throw new IllegalArgumentException(
+                    "Subtotal cannot be negative"
+            );
         }
 
         this.invoiceId = invoiceId;
         this.orderId = orderId;
         this.subtotal = subtotal;
-
         this.paid = false;
 
         calculateCharges();
@@ -88,6 +92,17 @@ public class Invoice implements Payable {
     }
 
     public void markAsPaid(PaymentMethod paymentMethod) {
+
+        if (this.paid) {
+            return;
+        }
+
+        if (paymentMethod == null) {
+            throw new IllegalArgumentException(
+                    "Payment method cannot be null"
+            );
+        }
+
         this.paymentMethod = paymentMethod;
         this.paid = true;
     }

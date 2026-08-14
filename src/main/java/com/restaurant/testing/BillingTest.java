@@ -26,9 +26,6 @@ public class BillingTest {
         testNullCustomerAccount();
     }
 
-    // -------------------------
-    // 1. CASH PAYMENT
-    // -------------------------
     private static void testCashPayment() {
 
         PaymentProcessor processor = new PaymentProcessor();
@@ -52,9 +49,6 @@ public class BillingTest {
         System.out.println("Method: " + invoice.getPaymentMethod());
     }
 
-    // -------------------------
-    // 2. CREDIT CARD PAYMENT
-    // -------------------------
     private static void testCreditCardPayment() {
 
         PaymentProcessor processor = new PaymentProcessor();
@@ -78,9 +72,6 @@ public class BillingTest {
         System.out.println("Method: " + invoice.getPaymentMethod());
     }
 
-    // -------------------------
-    // 3. BALANCE PAYMENT
-    // -------------------------
     private static void testBalancePayment() {
 
         PaymentProcessor processor = new PaymentProcessor();
@@ -102,13 +93,12 @@ public class BillingTest {
         System.out.println("Payment successful: " + result);
         System.out.println("Paid: " + invoice.isPaid());
         System.out.println("Method: " + invoice.getPaymentMethod());
-        System.out.println("Remaining balance: "
-                + account.getBalance());
+        System.out.println(
+                "Remaining balance: "
+                        + account.getBalance()
+        );
     }
 
-    // -------------------------
-    // 4. LOYALTY POINTS PAYMENT
-    // -------------------------
     private static void testLoyaltyPointsPayment() {
 
         PaymentProcessor processor = new PaymentProcessor();
@@ -129,15 +119,15 @@ public class BillingTest {
         System.out.println("\n===== LOYALTY POINTS =====");
         System.out.println("Payment successful: " + result);
         System.out.println("Paid: " + invoice.isPaid());
-        System.out.println("Method: "
-                + invoice.getPaymentMethod());
-        System.out.println("Remaining points: "
-                + account.getLoyaltyPoints());
+        System.out.println(
+                "Method: " + invoice.getPaymentMethod()
+        );
+        System.out.println(
+                "Remaining points: "
+                        + account.getLoyaltyPoints()
+        );
     }
 
-    // -------------------------
-    // 5. INSUFFICIENT BALANCE
-    // -------------------------
     private static void testInsufficientBalance() {
 
         PaymentProcessor processor = new PaymentProcessor();
@@ -158,13 +148,12 @@ public class BillingTest {
         System.out.println("\n===== INSUFFICIENT BALANCE =====");
         System.out.println("Payment successful: " + result);
         System.out.println("Paid: " + invoice.isPaid());
-        System.out.println("Remaining balance: "
-                + account.getBalance());
+        System.out.println(
+                "Remaining balance: "
+                        + account.getBalance()
+        );
     }
 
-    // -------------------------
-    // 6. INSUFFICIENT LOYALTY POINTS
-    // -------------------------
     private static void testInsufficientLoyaltyPoints() {
 
         PaymentProcessor processor = new PaymentProcessor();
@@ -182,24 +171,28 @@ public class BillingTest {
                         PaymentMethod.LOYALTY_POINTS
                 );
 
-        System.out.println("\n===== INSUFFICIENT LOYALTY POINTS =====");
-        System.out.println("Payment successful: " + result);
+        System.out.println(
+                "\n===== INSUFFICIENT LOYALTY POINTS ====="
+        );
+        System.out.println(
+                "Payment successful: " + result
+        );
         System.out.println("Paid: " + invoice.isPaid());
-        System.out.println("Remaining points: "
-                + account.getLoyaltyPoints());
+        System.out.println(
+                "Remaining points: "
+                        + account.getLoyaltyPoints()
+        );
     }
 
-    // -------------------------
-    // 7. INVALID INVOICE
-    // -------------------------
     private static void testInvalidInvoice() {
 
         try {
 
-            Invoice invoice =
-                    new Invoice("INV007", "ORD007", -100.0);
+            new Invoice("INV007", "ORD007", -100.0);
 
-            System.out.println("Invalid invoice was created.");
+            System.out.println(
+                    "Invalid invoice was created."
+            );
 
         } catch (IllegalArgumentException e) {
 
@@ -208,28 +201,25 @@ public class BillingTest {
         }
     }
 
-    // -------------------------
-    // 8. INVALID CUSTOMER ACCOUNT
-    // -------------------------
     private static void testInvalidCustomerAccount() {
 
         try {
 
-            CustomerAccount account =
-                    new CustomerAccount(-500.0, 100);
+            new CustomerAccount(-500.0, 100);
 
-            System.out.println("Invalid account was created.");
+            System.out.println(
+                    "Invalid account was created."
+            );
 
         } catch (IllegalArgumentException e) {
 
-            System.out.println("\n===== INVALID CUSTOMER ACCOUNT =====");
+            System.out.println(
+                    "\n===== INVALID CUSTOMER ACCOUNT ====="
+            );
             System.out.println("Error: " + e.getMessage());
         }
     }
 
-    // -------------------------
-    // 9. PAY ALREADY PAID INVOICE
-    // -------------------------
     private static void testAlreadyPaidInvoice() {
 
         PaymentProcessor processor = new PaymentProcessor();
@@ -261,25 +251,37 @@ public class BillingTest {
                         PaymentMethod.BALANCE
                 );
 
-        System.out.println("\n===== PAY ALREADY PAID INVOICE =====");
-        System.out.println("First payment: " + firstPayment);
-        System.out.println("Second payment: " + secondPayment);
-        System.out.println("Third payment: " + thirdPayment);
-        System.out.println("Remaining balance: "
-                + account.getBalance());
+        System.out.println(
+                "\n===== PAY ALREADY PAID INVOICE ====="
+        );
+        System.out.println(
+                "First payment: " + firstPayment
+        );
+        System.out.println(
+                "Second payment: " + secondPayment
+        );
+        System.out.println(
+                "Third payment: " + thirdPayment
+        );
+        System.out.println(
+                "Remaining balance: "
+                        + account.getBalance()
+        );
     }
 
-    // -------------------------
-    // 10. INVALID PAYMENT METHOD
-    // -------------------------
     private static void testInvalidPaymentMethod() {
 
-        PaymentProcessor processor = new PaymentProcessor();
+        PaymentProcessor processor =
+                new PaymentProcessor();
 
         try {
 
             Invoice invoice =
-                    new Invoice("INV010", "ORD010", 100.0);
+                    new Invoice(
+                            "INV010",
+                            "ORD010",
+                            100.0
+                    );
 
             CustomerAccount account =
                     new CustomerAccount(500.0, 0);
@@ -290,21 +292,25 @@ public class BillingTest {
                     null
             );
 
-            System.out.println("Invalid payment method was accepted.");
+            System.out.println(
+                    "Invalid payment method was accepted."
+            );
 
         } catch (IllegalArgumentException e) {
 
-            System.out.println("\n===== INVALID PAYMENT METHOD =====");
-            System.out.println("Error: " + e.getMessage());
+            System.out.println(
+                    "\n===== INVALID PAYMENT METHOD ====="
+            );
+            System.out.println(
+                    "Error: " + e.getMessage()
+            );
         }
     }
 
-    // -------------------------
-    // 11. NULL INVOICE
-    // -------------------------
     private static void testNullInvoice() {
 
-        PaymentProcessor processor = new PaymentProcessor();
+        PaymentProcessor processor =
+                new PaymentProcessor();
 
         CustomerAccount account =
                 new CustomerAccount(500.0, 0);
@@ -317,24 +323,30 @@ public class BillingTest {
                     PaymentMethod.CASH
             );
 
-            System.out.println("Null invoice was accepted.");
+            System.out.println(
+                    "Null invoice was accepted."
+            );
 
         } catch (IllegalArgumentException e) {
 
             System.out.println("\n===== NULL INVOICE =====");
-            System.out.println("Error: " + e.getMessage());
+            System.out.println(
+                    "Error: " + e.getMessage()
+            );
         }
     }
 
-    // -------------------------
-    // 12. NULL CUSTOMER ACCOUNT
-    // -------------------------
     private static void testNullCustomerAccount() {
 
-        PaymentProcessor processor = new PaymentProcessor();
+        PaymentProcessor processor =
+                new PaymentProcessor();
 
         Invoice invoice =
-                new Invoice("INV012", "ORD012", 100.0);
+                new Invoice(
+                        "INV012",
+                        "ORD012",
+                        100.0
+                );
 
         try {
 
@@ -344,12 +356,18 @@ public class BillingTest {
                     PaymentMethod.BALANCE
             );
 
-            System.out.println("Null customer account was accepted.");
+            System.out.println(
+                    "Null customer account was accepted."
+            );
 
         } catch (IllegalArgumentException e) {
 
-            System.out.println("\n===== NULL CUSTOMER ACCOUNT =====");
-            System.out.println("Error: " + e.getMessage());
+            System.out.println(
+                    "\n===== NULL CUSTOMER ACCOUNT ====="
+            );
+            System.out.println(
+                    "Error: " + e.getMessage()
+            );
         }
     }
 }

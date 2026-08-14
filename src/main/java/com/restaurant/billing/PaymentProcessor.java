@@ -23,38 +23,45 @@ public class PaymentProcessor {
             );
         }
 
-        if (invoice.isPaid()) {
-            return false;
-        }
-
-        boolean successful = false;
-
         if (method == null) {
             throw new IllegalArgumentException(
                     "Payment method cannot be null"
             );
         }
 
+        if (invoice.isPaid()) {
+            return false;
+        }
+
+        boolean successful = false;
+
         if (method == PaymentMethod.CASH) {
+
             successful = true;
-        }
 
-        else if (method == PaymentMethod.CREDIT_CARD) {
+        } else if (method == PaymentMethod.CREDIT_CARD) {
+
             successful = true;
-        }
 
-        else if (method == PaymentMethod.BALANCE) {
-            successful = account.deductBalance(invoice.calculateTotal());
-        }
+        } else if (method == PaymentMethod.BALANCE) {
 
-        else if (method == PaymentMethod.LOYALTY_POINTS) {
+            successful =
+                    account.deductBalance(
+                            invoice.calculateTotal()
+                    );
+
+        } else if (method == PaymentMethod.LOYALTY_POINTS) {
 
             int requiredPoints =
                     (int) Math.ceil(
-                            invoice.calculateTotal() * POINTS_PER_EGP
+                            invoice.calculateTotal()
+                                    * POINTS_PER_EGP
                     );
 
-            successful = account.deductLoyaltyPoints(requiredPoints);
+            successful =
+                    account.deductLoyaltyPoints(
+                            requiredPoints
+                    );
         }
 
         if (successful) {

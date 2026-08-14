@@ -58,5 +58,4 @@ public class CustomerAccount {
         loyaltyPoints -= points;
         return true;
     }
-
 }

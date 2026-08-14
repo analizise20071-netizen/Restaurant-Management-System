@@ -1,0 +1,21 @@
+.root {
+    -fx-background-color: lightblue;
+    -fx-padding: 30px;
+}
+
+.label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.button {
+    -fx-background-color: darkblue;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 25px;
+}
+
+.combo-box {
+    -fx-pref-width: 220px;
+    -fx-font-size: 16px;
+}
